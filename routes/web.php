@@ -30,19 +30,16 @@ Route::get("/listing",[listingController::class,'index']);
 Route::get("/details",[detailsController::class,'index']);
 
 Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
-    Route::get('/',[dashboardController::class,'index']);
-    Route::get('/category',[categoryController::class,'index']);
-    Route::get('/category/create',[categoryController::class,'create']);
-    Route::get('/category/edit',[categoryController::class,'edit']);
 
+    Route::get('/',[dashboardController::class,'index']);
     Route::group(['middleware'=>'permission:All'], function(){
             //  Permission
-        Route::get('/permission',[permissionController::class,'index']);
-        Route::get('/permission/create',[permissionController::class,'create']);
-        Route::post('/permission/store',[permissionController::class,'store']);
-        Route::get('/permission/edit/{id}',[permissionController::class,'edit'])->name('permission-edit');
-        Route::put('/permission/edit/{id}',[permissionController::class,'update',])->name('permission-update');
-        Route::delete('/permission/delete/{id}',[permissionController::class,'destroy',])->name('permission-delete');
+        Route::get('/permission',[permissionController::class,'index','middleware'=>'permission:Permission List'])->name('permission');
+        Route::get('/permission/create',[permissionController::class,'create','middleware'=>'permission:Permission Create'])->name('permission-create');
+        Route::post('/permission/store',[permissionController::class,'store','middleware'=>'permission:Permission Add'])->name('permission-store');
+        Route::get('/permission/edit/{id}',[permissionController::class,'edit','middleware'=>'permission:Permission Update'])->name('permission-edit')->name('permission-edit');
+        Route::put('/permission/edit/{id}',[permissionController::class,'update','middleware'=>'permission:Permission Update'])->name('permission-update');
+        Route::delete('/permission/delete/{id}',[permissionController::class,'destroy','middleware'=>'permission:Permission Delete'])->name('permission-delete');
 
         //  Role
         Route::get('/role',[roleController::class,'index']);
@@ -61,6 +58,16 @@ Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
         Route::delete('/author/delete/{id}',[authorController::class,'destroy',])->name('permission-delete');
 
     });
+
+    //  Category
+    Route::get('/category',[categoryController::class,'index','middleware'=>'permission:Permission List'])->middleware(['permission:All|Category List'])->name('category');
+    Route::get('/category/create',[categoryController::class,'create'])->middleware(['permission:All|Category Create'])->name('category-create');
+    Route::post('/category/store',[categoryController::class,'store'])->middleware(['permission:All|Category Add'])->name('category-store');
+    Route::get('/category/edit/{id}',[categoryController::class,'edit'])->middleware(['permission:All|Category Update'])->name('category-edit');
+    Route::put('/category/edit/{id}',[categoryController::class,'update'])->middleware(['permission:All|Category Update'])->name('category-update');
+    Route::put('/category/status/{id}',[categoryController::class,'status'])->middleware(['permission:All|Category Update'])->name('category-status');
+    Route::delete('/category/delete/{id}',[categoryController::class,'destroy'])->middleware(['permission:All|Category Delete'])->name('category-delete');
+    
 });
 
 Auth::routes();
