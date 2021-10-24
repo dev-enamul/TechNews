@@ -10,6 +10,7 @@ use App\Http\Controllers\back\categoryController;
 use App\Http\Controllers\back\permissionController; 
 use App\Http\Controllers\back\roleController; 
 use App\Http\Controllers\back\authorController; 
+use App\Http\Controllers\back\postController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -60,13 +61,23 @@ Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
     });
 
     //  Category
-    Route::get('/category',[categoryController::class,'index','middleware'=>'permission:Permission List'])->middleware(['permission:All|Category List'])->name('category');
+    Route::get('/category',[categoryController::class,'index'])->middleware(['permission:All|Category List'])->name('category');
     Route::get('/category/create',[categoryController::class,'create'])->middleware(['permission:All|Category Create'])->name('category-create');
     Route::post('/category/store',[categoryController::class,'store'])->middleware(['permission:All|Category Add'])->name('category-store');
     Route::get('/category/edit/{id}',[categoryController::class,'edit'])->middleware(['permission:All|Category Update'])->name('category-edit');
     Route::put('/category/edit/{id}',[categoryController::class,'update'])->middleware(['permission:All|Category Update'])->name('category-update');
     Route::put('/category/status/{id}',[categoryController::class,'status'])->middleware(['permission:All|Category Update'])->name('category-status');
     Route::delete('/category/delete/{id}',[categoryController::class,'destroy'])->middleware(['permission:All|Category Delete'])->name('category-delete');
+
+    //  Post
+    Route::get('/post',[postController::class,'index'])->middleware(['permission:All|Post List'])->name('post');
+    Route::get('/post/create',[postController::class,'create'])->middleware(['permission:All|Post Add'])->name('post-create');
+    Route::post('/post/store',[postController::class,'store'])->middleware(['permission:All|Post Add'])->name('post-store');
+    Route::get('/post/edit/{id}',[postController::class,'edit'])->middleware(['permission:All|Post Update'])->name('post-edit');
+    Route::put('/post/edit/{id}',[postController::class,'update'])->middleware(['permission:All|Post Update'])->name('post-update');
+    Route::put('/post/status/{id}',[postController::class,'status'])->middleware(['permission:All|Post Update'])->name('post-status');
+    Route::put('/post/hot_news/{id}',[postController::class,'hot_news'])->middleware(['permission:All|Post Update'])->name('hot_news');
+    Route::delete('/post/delete/{id}',[postController::class,'destroy'])->middleware(['permission:All|Post Delete'])->name('post-delete');
     
 });
 

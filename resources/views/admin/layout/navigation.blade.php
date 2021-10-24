@@ -38,6 +38,12 @@
                         <a href="{{url('/back/category')}}"> <i class="menu-icon fa fa-dashboard"></i>Category </a>
                     </li>
                     @endif  
+
+                    @permission(['All','Post List'])
+                    <li class="active">
+                        <a href="{{url('/back/post')}}"> <i class="menu-icon fa fa-dashboard"></i>Post</a>
+                    </li>
+                    @endif  
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
