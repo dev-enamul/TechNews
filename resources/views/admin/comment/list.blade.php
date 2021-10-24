@@ -5,7 +5,7 @@
 @section('mainContent')
  
  
-    <link rel="stylesheet" href="{{asset('admin/assets')}}/css/lib/datatable/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="{{asset('admin/assets')}}/css/lib/datatable/dataTables.bootstrap.min.css">
    
 <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -42,60 +42,43 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">{{$page_name}}</strong>
-                            <a href="{{url('back/post/create')}}" class="btn btn-info pull-right">Create</a>
                         </div>
                       <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                         <th>Si</th>
-                        <th>Title</th>
-                        <th>Image</th>
-                        <th>Author</th>
-                        <th>Total View</th>
+                        <th>Name</th>
+                        <th>Post</th>
+                        <th>Comment</th>
                         <th>Status</th>
-                        <th>Hot Post</th>
-                        <th>Option</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       @foreach($data as $i=>$row)
                       <tr>
                         <td>{{++$i}}</td>
-                        <td>{{$row->title}}</td>
-                        <td>
-                        @if(file_exists(public_path('post/').$row->thumb_image))
-                            <img src="{{asset('post')}}/{{$row->thumb_image}}" width="100px">
-                        @endif
-                        </td>
-                        <td>{{$row->creator->name}}</td>
-                        <td>{{$row->view_count}}</td>
-                        <td>
-                            {{Form::open(['url'=>['back/post/status',$row->id],'method'=>'put'])}}
-                                @if($row->status==0)  
-                                    {{Form::submit('Publish',['class'=>'btn btn-success'])}}
-                                @else
-                                {{Form::submit('Unpublish',['class'=>'btn btn-danger'])}}
-                                @endif
-                            {{Form::close()}}
-                        </td>
+                        <td>{{$row->name}}</td>
+                        <td>{{$row->post->title}}</td>
+                        <td>{{$row->comment}}</td>
 
                         <td>
-                            {{Form::open(['url'=>['back/post/hot_news',$row->id],'method'=>'put'])}}
-                                @if($row->hot_news==0)  
-                                    {{Form::submit('Yes',['class'=>'btn btn-success'])}}
-                                @else
-                                {{Form::submit('No',['class'=>'btn btn-danger'])}}
-                                @endif
-                            {{Form::close()}}
+                        {{Form::open(['url'=>['back/comment/status',$row->id],'method'=>'put'])}}
+                            @if($row->status==0)  
+                                {{Form::submit('Publish',['class'=>'btn btn-success'])}}
+                            @else
+                            {{Form::submit('Unpublish',['class'=>'btn btn-danger'])}}
+                            @endif
+                          {{Form::close()}}
+
                         </td>
-                        <td ><a style="display:inline" href="{{url('back/comment/'.$row->id)}}" class="btn btn-info">Comment</a>
+                        
 
-                        <td ><a style="display:inline" href="{{url('back/post/edit/'.$row->id)}}" class="btn btn-info">Edit</a>
-                            {{Form::open(['url'=>['back/post/delete',$row->id],'method'=>'delete','style'=>'display:inline'])}}
-                                {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
-
-                            {{Form::close()}}
+                        <td>
+                            @permission(['Comment Reply','All'])
+                                <a style="display:inline" href="{{route('comment_reply',$row->post_id)}}" class="btn btn-info">Reply</a>
+                            @endpermission
                       </td>
                       </tr>
                       @endforeach
