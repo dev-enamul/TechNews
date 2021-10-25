@@ -44,6 +44,12 @@
                         <a href="{{url('/back/post')}}"> <i class="menu-icon fa fa-dashboard"></i>Post</a>
                     </li>
                     @endif  
+
+                    @permission(['All','System Setting'])
+                    <li class="active">
+                        <a href="{{url('/back/setting/edit')}}"> <i class="menu-icon fa fa-dashboard"></i>System Setting</a>
+                    </li>
+                    @endif 
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

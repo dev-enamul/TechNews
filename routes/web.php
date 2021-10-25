@@ -12,6 +12,7 @@ use App\Http\Controllers\back\roleController;
 use App\Http\Controllers\back\authorController; 
 use App\Http\Controllers\back\postController; 
 use App\Http\Controllers\back\commentController; 
+use App\Http\Controllers\back\settingController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -77,15 +78,20 @@ Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
     Route::get('/post/edit/{id}',[postController::class,'edit'])->middleware(['permission:All|Post Update'])->name('post-edit');
     Route::put('/post/edit/{id}',[postController::class,'update'])->middleware(['permission:All|Post Update'])->name('post-update');
     Route::put('/post/status/{id}',[postController::class,'status'])->middleware(['permission:All|Post Update'])->name('post-status');
-    Route::put('/post/hot_news/{id}',[postController::class,'hot_news'])->middleware(['permission:All|Post Update'])->name('hot_news');
-    Route::delete('/post/delete/{id}',[postController::class,'destroy'])->middleware(['permission:All|Post Delete'])->name('post_delete');
+    Route::put('/post/hot_news/{id}',[postController::class,'hot_news'])->middleware(['permission:All|Post Update'])->name('hot-news');
+    Route::delete('/post/delete/{id}',[postController::class,'destroy'])->middleware(['permission:All|Post Delete'])->name('post-delete');
 
 
     //  Comment
     Route::get('/comment/{id}',[commentController::class,'index'])->middleware(['permission:All|Comment List'])->name('comment');
-    Route::get('/comment/reply/{id}',[commentController::class,'reply'])->middleware(['permission:All|Comment Reply'])->name('comment_reply');
-    Route::post('/comment/reply',[commentController::class,'replyStore'])->middleware(['permission:All|Comment Reply'])->name('reply-_store');
+    Route::get('/comment/reply/{id}',[commentController::class,'reply'])->middleware(['permission:All|Comment Reply'])->name('comment-reply');
+    Route::post('/comment/reply',[commentController::class,'replyStore'])->middleware(['permission:All|Comment Reply'])->name('reply-store');
     Route::put('/comment/status/{id}',[commentController::class,'status'])->middleware(['permission:All|Comment Reply|Comment Approval'])->name('comment-status');
+
+    //  Setting
+    Route::get('/setting/edit',[settingController::class,'edit'])->middleware(['permission:All|System Setting'])->name('setting-edit');
+    Route::put('/setting/edit/{id}',[settingController::class,'update'])->middleware(['permission:All|System Setting'])->name('setting-update');
+    
    
     
 });
