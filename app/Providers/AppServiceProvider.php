@@ -36,5 +36,8 @@ class AppServiceProvider extends ServiceProvider
         $popularShareData = Post::where('status',1)->with(['creator','comments'])->orderBy('view_count','desc')->limit(4)->get();
         view()->share('popularShareData',$popularShareData);
 
+        $mostCommentData = Post::where('status',1)->withcount(['comments'])->orderBy('comments_count','desc')->limit(4)->get();
+        view()->share('mostCommentData',$mostCommentData);
+
     }
 }
