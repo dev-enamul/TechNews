@@ -30,7 +30,7 @@ use App\Http\Controllers\back\settingController;
 // });
 Route::get("/",[welcomeController::class,'index']);
 Route::get("/category/{id}",[listingController::class,'index']);
-Route::get("/details",[detailsController::class,'index']);
+Route::get("/details/{slug}",[detailsController::class,'index']);
 
 Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
 

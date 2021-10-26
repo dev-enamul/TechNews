@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('setting').'/'.$settingShareData->fontLogo}}" alt="Tech NewsLogo"></a>
+                        <a href="{{url('/')}}"><img src="{{asset('setting').'/'.$settingShareData->fontLogo}}" alt="Tech NewsLogo"></a>
                     </div>
                     <!-- Logo Section -->
                 </div>
@@ -93,7 +93,7 @@
                         <ul class="nav navbar-nav main-nav">
 
                         @foreach($categoryShareData as $categoryData)
-                            <li class="active"><a href="index.html">{{$categoryData->name}}</a></li>
+                            <li class="active"><a href="{{url('category',$categoryData->id)}}">{{$categoryData->name}}</a></li>
                         
                         @endforeach
 

@@ -130,13 +130,14 @@
 
 <div class="category_section mobile">
     @foreach($categoryPosts as $categoryPost)
-
+    @if(count($categoryPost->posts) > 0)
     <div class="article_title header_purple">
         <h2><a href="category.html" target="_self">{{$categoryPost->name}}</a></h2>
     </div>
+    @endif
     <!----article_title------>
     @foreach($categoryPost->posts as $key => $item)
-   
+    
     @if($key===0)
     <div class="category_article_wrapper">
         <div class="row">
@@ -163,8 +164,7 @@
                 </div>
                 <!----category_article_content------>
                 <div class="media_social">
-                    <span><a href="#"><i class="fa fa-share-alt"></i>424 </a> Shares</span>
-                    <span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
+                    <span><i class="fa fa-comments-o"></i><a href="#">{{count($item->comments)}}</a> Comments</span>
                 </div>
                 <!----media_social------>
             </div>
@@ -187,7 +187,7 @@
                         <span class="media-date"><a href="#">{{date('F j-y',strtotime($item->created_at))}}</a>,  by: <a href="#">{{$item->creator->name}}</a></span>
 
                         <div class="media_social">
-                            <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                            <span><a href="#"><i class="fa fa-comments-o"></i>{{count($item->comments)}}</a> Comments</span>
                         </div>
                     </div>
                 </div>
