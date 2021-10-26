@@ -12,4 +12,8 @@ class Post extends Model
     public function creator(){
         return $this->belongsTo('App\Models\User','created_by','id');
     }
+
+    public function comments(){
+        return $this->belongsTo('App\Models\Comment');
+    }
 }

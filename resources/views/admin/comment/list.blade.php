@@ -77,7 +77,7 @@
 
                         <td>
                             @permission(['Comment Reply','All'])
-                                <a style="display:inline" href="{{route('comment_reply',$row->post_id)}}" class="btn btn-info">Reply</a>
+                                <a style="display:inline" href="{{route('comment-reply',$row->post_id)}}" class="btn btn-info">Reply</a>
                             @endpermission
                       </td>
                       </tr>

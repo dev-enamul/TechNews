@@ -89,9 +89,11 @@
                                 @endif
                             {{Form::close()}}
                         </td>
-                        <td ><a style="display:inline" href="{{url('back/comment/'.$row->id)}}" class="btn btn-info">Comment</a>
+                        
 
-                        <td ><a style="display:inline" href="{{url('back/post/edit/'.$row->id)}}" class="btn btn-info">Edit</a>
+                        <td >
+                        <a style="display:inline" href="{{url('back/comment/'.$row->id)}}" class="btn btn-info">Comment</a>    
+                        <a style="display:inline" href="{{url('back/post/edit/'.$row->id)}}" class="btn btn-info">Edit</a>
                             {{Form::open(['url'=>['back/post/delete',$row->id],'method'=>'delete','style'=>'display:inline'])}}
                                 {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
 

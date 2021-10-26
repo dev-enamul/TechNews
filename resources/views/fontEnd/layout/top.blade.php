@@ -4,7 +4,7 @@
     <title>TechNews - HTML and CSS Template</title>
 
     <!-- favicon -->
-    <link href="{{asset('fontEnd')}}/img/favicon.png" rel=icon>
+    <link href="{{asset('setting').'/'.$settingShareData->fabIcon}}" rel=icon>
 
     <!-- web-fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
