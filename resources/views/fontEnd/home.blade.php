@@ -15,7 +15,7 @@
                     <div class="feature_article_inner">
                         <div class="tag_lg red"><a href="category.html">Hot News</a></div>
                         <div class="feature_article_title">
-                            <h1><a href="single.html" target="_self">{{$hotNews->title}} </a></h1>
+                            <h1><a href="{{url('details/'.$hotNews->slug)}}" target="_self">{{$hotNews->title}} </a></h1>
                         </div>
                         <!-- feature_article_title -->
 
@@ -51,7 +51,7 @@
                     <div class="feature_article_inner">
                         <div class="tag_lg purple"><a href="category.html">Top Viewed</a></div>
                         <div class="feature_article_title">
-                            <h1><a href="single.html" target="_self">{{$popularShareData[0]->title}} </a></h1>
+                            <h1><a href="{{url('details/'.$popularShareData[0]->slug)}}" target="_self">{{$popularShareData[0]->title}} </a></h1>
                         </div>
                         <!-- feature_article_title -->
 
@@ -89,7 +89,7 @@
                         <div class="tag_lg blue"><a href="category.html">Top Viewed</a></div>
 
                         <div class="feature_article_title">
-                            <h1><a href="single.html" target="_self">{{$popularShareData[1]->title}}</a></h1>
+                            <h1><a href="{{url('details/'.$popularShareData[1]->slug)}}" target="_self">{{$popularShareData[1]->title}}</a></h1>
                         </div>
                         <!-- feature_article_title -->
 
@@ -132,18 +132,21 @@
     @foreach($categoryPosts as $categoryPost)
     @if(count($categoryPost->posts) > 0)
     <div class="article_title header_purple">
-        <h2><a href="category.html" target="_self">{{$categoryPost->name}}</a></h2>
+        <h2><a href="{{url('details/'.$categoryPost->slug)}}" target="_self">{{$categoryPost->name}}</a></h2>
     </div>
     @endif
     <!----article_title------>
     @foreach($categoryPost->posts as $key => $item)
+    @if($key>4)
+        @break
+    @endif
     
     @if($key===0)
     <div class="category_article_wrapper">
         <div class="row">
             <div class="col-md-6 ">
                 <div class="top_article_img">
-                    <a href="single.html" target="_self"><img class="img-responsive"
+                    <a href="{{url('details/'.$item->slug)}}" target="_self"><img class="img-responsive"
                       src="{{asset('post'.'/'.$item->main_image)}}" alt="feature-top">
                     </a>
                 </div>
@@ -153,14 +156,14 @@
                 <span class="tag purple">{{$categoryPost->name}}</span>
 
                 <div class="category_article_title">
-                    <h2><a href="single.html" target="_self">{{$item->title}}</a></h2>
+                    <h2><a href="{{url('details/'.$item->slug)}}" target="_self">{{$item->title}}</a></h2>
                 </div>
                 <!----category_article_title------>
                 <div class="category_article_date"><a href="#">{{date('F j-y',strtotime($item->created_at))}}</a>, by: <a href="#">{{$item->creator->name}}</a></div>
                 <!----category_article_date------>
                 <div class="category_article_content">
                    
-                    {{\Illuminate\Support\Str::limit($item->description,300)}}
+                    {{\Illuminate\Support\Str::limit($item->short_description,300)}}
                 </div>
                 <!----category_article_content------>
                 <div class="media_social">
@@ -178,13 +181,13 @@
             <div class="col-md-6" style="margin-bottom:10px;" >
                 <div class="media">
                     <div class="media-left">
-                        <a href="#"><img class="media-object" src="{{asset('post'.'/'.$item->list_image)}}"alt="Generic placeholder image"></a>
+                        <a href="{{url('details/'.$item->slug)}}"><img class="media-object" src="{{asset('post'.'/'.$item->list_image)}}"alt="Generic placeholder image"></a>
                     </div>
                     <div class="media-body">
                         <span class="tag purple">{{$categoryPost->name}}  </span>
 
-                        <h3 class="media-heading"><a href="single.html" target="_self"> {{\Illuminate\Support\Str::limit($item->title,45)}}</a></h3>
-                        <span class="media-date"><a href="#">{{date('F j-y',strtotime($item->created_at))}}</a>,  by: <a href="#">{{$item->creator->name}}</a></span>
+                        <h3 class="media-heading"><a href="{{url('details/'.$item->slug)}}" target="_self"> {{\Illuminate\Support\Str::limit($item->title,45)}}</a></h3>
+                        <span class="media-date"><a href=" ">{{date('F j-y',strtotime($item->created_at))}}</a>,  by: <a href="#">{{$item->creator->name}}</a></span>
 
                         <div class="media_social">
                             <span><a href="#"><i class="fa fa-comments-o"></i>{{count($item->comments)}}</a> Comments</span>
@@ -198,7 +201,9 @@
   @endif
     @endif
     @endforeach
-    <p class="divider"><a href="#">More News&nbsp;&raquo;</a></p>
+    @if(count($categoryPost->posts) > 0)
+    <p class="divider"><a href="{{url('category/'.$categoryPost->id)}}">More News&nbsp;&raquo;</a></p>
+    @endif
     @endforeach
 </div>
 <!-- Mobile News Section -->
@@ -219,11 +224,11 @@
     @foreach($popularShareData as $popularData)
     <div class="media">
         <div class="media-left">
-            <a href="#"><img class="media-object" src="{{asset('post'.'/'.$popularData->list_image)}}" alt="Generic placeholder image"></a>
+            <a href="{{url('details'.$popularData->slug)}}"><img class="media-object" src="{{asset('post'.'/'.$popularData->list_image)}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
             <h3 class="media-heading">
-                <a href="single.html" target="_self">{{$popularData->title}}</a>
+                <a href="{{url('details'.$popularData->slug)}}" target="_self">{{$popularData->title}}</a>
             </h3> <span class="media-date"><a href="#">{{date('j F -y',strtotime($popularData->created_at))}}</a>,  by: <a href="#">{{$popularData->creator->name}}</a></span>
 
             <div class="widget_article_social"> 
@@ -265,11 +270,11 @@
     @foreach($mostCommentData as $mostComment)
     <div class="media">
         <div class="media-left">
-            <a href="#"><img class="media-object" src="{{asset('post').'/'.$mostComment->list_image}}" alt="Generic placeholder image"></a>
+            <a href="{{url('details/'.$popularData->slug)}}"><img class="media-object" src="{{asset('post').'/'.$mostComment->list_image}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
             <h3 class="media-heading">
-                <a href="single.html" target="_self">{{$mostComment->title}}</a>
+                <a href="{{url('details/'.$popularData->slug)}}" target="_self">{{$mostComment->title}}</a>
             </h3>
 
             <div class="media_social">
@@ -358,25 +363,5 @@
 
 </section>
 <!-- Video News Section -->
-
-<section id="subscribe_section" class="subscribe_section">
-    <div class="row">
-        <form action="#" method="post" class="form-horizontal">
-            <div class="form-group form-group-lg">
-                <label class="col-sm-6 control-label" for="formGroupInputLarge">
-                    <h1><span class="red-color">Sign up</span> for the latest news</h1>
-                </label>
-
-                <div class="col-sm-3">
-                    <input type="text" id="subscribe" name="subscribe" class="form-control input-lg">
-                </div>
-                <div class="col-sm-1">
-                    <input type="submit" value="Sign Up" class="btn btn-large pink">
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
-        </form>
-    </div>
-</section>
-<!-- Subscriber Section -->
+ 
 @endsection

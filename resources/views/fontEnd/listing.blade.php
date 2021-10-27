@@ -20,7 +20,7 @@
 @if($key === 0)
 <div class="entity_wrapper">
     <div class="entity_title header_purple">
-        <h1><a href="category.html" target="_blank">{{$category->name}}</a></h1>
+        <h1><a href="{{url('category/'.$category->id)}}" target="_blank">{{$category->name}}</a></h1>
     </div>
     <!-- entity_title -->
 
@@ -30,7 +30,7 @@
     <!-- entity_thumb -->
 
     <div class="entity_title">
-        <a href="single.html" target="_blank"><h3> {{$post->title}} </h3></a>
+        <a href="{{url('details/'.$post->slug)}}" target="_blank"><h3> {{$post->title}} </h3></a>
     </div>
     <!-- entity_title -->
 
@@ -64,7 +64,7 @@
             <!-- top_article_img -->
 
             <div class="category_article_title">
-                <h5><a href="single.html" target="_blank">{{$post->title}}</a></h5>
+                <h5><a href="{{url('details/'.$post->slug)}}" >{{$post->title}}</a></h5>
             </div>
             <!-- category_article_title -->
 
@@ -119,11 +119,11 @@
     @foreach($popularShareData as $popularData)
     <div class="media">
         <div class="media-left">
-            <a href="#"><img class="media-object" src="{{asset('post'.'/'.$popularData->list_image)}}" alt="Generic placeholder image"></a>
+            <a href="{{url('details/'.$popularData->slug)}}"><img class="media-object" src="{{asset('post'.'/'.$popularData->list_image)}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
             <h3 class="media-heading">
-                <a href="single.html" target="_self">{{$popularData->title}}</a>
+                <a href="{{url('details/'.$popularData->slug)}}" target="_self">{{$popularData->title}}</a>
             </h3> <span class="media-date"><a href="#">{{date('j F -y',strtotime($popularData->created_at))}}</a>,  by: <a href="#">{{$popularData->creator->name}}</a></span>
 
             <div class="widget_article_social"> 
@@ -165,11 +165,11 @@
     @foreach($mostCommentData as $mostComment)
     <div class="media">
         <div class="media-left">
-            <a href="#"><img class="media-object" src="{{asset('post').'/'.$mostComment->list_image}}" alt="Generic placeholder image"></a>
+            <a href="{{url('details/'.$mostComment->slug)}}"><img class="media-object" src="{{asset('post').'/'.$mostComment->list_image}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
             <h3 class="media-heading">
-                <a href="single.html" target="_self">{{$mostComment->title}}</a>
+                <a href="{{url('details/'.$mostComment->slug)}}" target="_self">{{$mostComment->title}}</a>
             </h3>
 
             <div class="media_social">
@@ -190,26 +190,5 @@
 <!-- row -->
 
 </div>
-<!-- container -->
-
-<section id="subscribe_section" class="subscribe_section">
-    <div class="row">
-        <form action="#" method="post" class="form-horizontal">
-            <div class="form-group form-group-lg">
-                <label class="col-sm-6 control-label" for="formGroupInputLarge">
-                    <h1><span class="red-color">Sign up</span> for the latest news</h1>
-                </label>
-
-                <div class="col-sm-3">
-                    <input type="text" id="subscribe" name="subscribe" class="form-control input-lg">
-                </div>
-                <div class="col-sm-1">
-                    <input type="submit" value="Sign Up" class="btn btn-large pink">
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
-        </form>
-    </div>
-</section>
-<!-- Subscriber Section -->
+ 
 @endsection

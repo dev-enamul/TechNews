@@ -7,7 +7,7 @@
                 <div class="footer_widget_title"><h3><a href="category.html" target="_self">About Tech</a></h3></div>
                 <div class="logo footer-logo">
                     <a title="fontanero" href="index.html">
-                        <img src="{{asset('fontEnd')}}/img/tech_about.jpg" alt="technews">
+                        <img src="{{asset('setting').'/'.$settingShareData->fontLogo}}" alt="technews">
                     </a>
 
                     <p>Competently conceptualize go forward testing procedures and B2B expertise. Phosfluorescently
@@ -19,36 +19,11 @@
                     <h3><a href="category.html" target="_self">Discover</a></h3>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
-                        <ul class="list-unstyled left">
-                            <li><a href="#">Mobile</a></li>
-                            <li><a href="#">Tablet</a></li>
-                            <li><a href="#">Gadgets</a></li>
-                            <li><a href="#">Design</a></li>
-                            <li><a href="#">Camera</a></li>
-                            <li><a href="#">Apps</a></li>
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Membership</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Job</a></li>
-                            <li><a href="#">SiteMap</a></li>
-                        </ul>
-                    </div>
                     <div class="col-xs-8">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Newsletter Alerts</a></li>
-                            <li><a href="#">Podcast</a></li>
-                            <li><a href="#">Sms Subscription</a></li>
-                            <li><a href="#">Advertisement Policy</a></li>
-                            <li><a href="#">Report Technical issue</a></li>
-                            <li><a href="#">Complaints and Corrections</a></li>
-                            <li><a href="#">Terms and Conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Cookie Policy</a></li>
-                            <li><a href="#">Securedrop</a></li>
-                            <li><a href="#">Archives</a></li>
+                    <ul class="list-unstyled left">
+                            @foreach($categoryShareData as $category)
+                            <li><a href="{{url('category').'/'.$category->id}}">{{$category->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -57,60 +32,21 @@
                 <div class="footer_widget_title">
                     <h3><a href="#" target="_self">Editor Picks</a></h3>
                 </div>
+                @foreach($popularShareData as $key => $popular)
+                @if($key>1)
+                    @break
+                @endif
                 <div class="media">
                     <div class="media-left">
-                        <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/editor_pic1.jpg"
-                                         alt="Generic placeholder image"></a>
+                        <a href="#"><img class="media-object" src="{{asset('post').'/'.$popular->list_image}}"></a>
                     </div>
                     <div class="media-body">
                         <h3 class="media-heading">
-                            <a href="single.html">Apple launches photo-centric wrist watch for Android</a>
+                            <a href="{{url('details').'/'.$popular->slug}}">{{$popular->title}}</a>
                         </h3> 
-                        <span class="rating">
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star-half-full"></i> 
-                        </span>
                     </div>
                 </div>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/editor_pic2.jpg"
-                                         alt="Generic placeholder image"></a>
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">
-                            <a href="single.html">Apple launches photo-centric wrist watch for Android</a>
-                        </h3> 
-                        <span class="rating">
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star-half-full"></i> 
-                        </span>
-                    </div>
-                </div>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/editor_pic3.jpg"
-                                         alt="Generic placeholder image"></a>
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">
-                            <a href="single.html">Apple launches photo-centric wrist watch for Android</a>
-                        </h3> 
-                        <span class="rating">
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star"></i> 
-                            <i class="fa fa-star-half-full"></i> 
-                        </span>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="col-md-3">
                 <div class="footer_widget_title">
@@ -153,7 +89,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <p>&copy; Copyright 2016-Tech News . Design by: <a href="https://uicookies.com">uiCookies</a> </p>
+                        <p>&copy; Copyright 2021-Enamul-Soft Design by: <a href="https://www.facebook.com/proenamul">Md Enamul Haque</a> </p>
                     </div>
                     <div class="col-sm-3">
                         <p>Technology News Magazine</p>

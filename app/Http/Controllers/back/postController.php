@@ -78,7 +78,7 @@ class postController extends Controller
         $thumb_image = 'post_thumb_'.$post->title.''.time().'.'.$extension;
         $list_image = 'post_list_'.$post->title.''.time().'.'.$extension;
 
-        Image::make($file)->resize(6955,832)->save(public_path('/post'.'/'.$main_image));
+        Image::make($file)->resize(955,832)->save(public_path('/post'.'/'.$main_image));
         Image::make($file)->resize(670,395)->save(public_path('/post'.'/'.$thumb_image));
         Image::make($file)->resize(122,122)->save(public_path('/post'.'/'.$list_image));
 

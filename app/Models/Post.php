@@ -13,6 +13,10 @@ class Post extends Model
         return $this->belongsTo('App\Models\User','created_by','id');
     }
 
+    public function category(){
+        return $this->belongsTo('App\Models\Category','category_id','id');
+    }
+
     public function comments(){
         return $this->hasMany('App\Models\Comment');
     }

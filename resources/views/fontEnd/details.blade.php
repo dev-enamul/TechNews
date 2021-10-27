@@ -8,11 +8,11 @@
 <div class="col-md-8">
 <div class="entity_wrapper">
     <div class="entity_title">
-        <h1><a href="#">Chevrolet car-saving technology delivers 'superhuman' sight when you need it most</a></h1>
+        <h1><a href="#"> {{$post->title}}</a></h1>
     </div>
     <!-- entity_title -->
 
-    <div class="entity_meta"><a href="#" target="_self">10Aug- 2015</a>, by: <a href="#" target="_self">Eric joan</a>
+    <div class="entity_meta"><a href="#" target="_self">{{date('F i-y',strtotime($post->created_at))}}</a>, by: <a href="#" target="_self">{{$post->creator->name}}</a>
     </div>
     <!-- entity_meta -->
 
@@ -26,10 +26,6 @@
     <!-- entity_rating -->
 
     <div class="entity_social">
-        <a href="#" class="icons-sm sh-ic">
-            <i class="fa fa-share-alt"></i>
-            <b>424</b> <span class="share_ic">Shares</span>
-        </a>
         <a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
         <!--Twitter-->
         <a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
@@ -43,66 +39,24 @@
     <!-- entity_social -->
 
     <div class="entity_thumb">
-        <img class="img-responsive" src="{{asset('fontEnd')}}/img/category_img_top.jpg" alt="feature-top">
+        <img class="img-responsive" src="{{asset('post').'/'.$post->thumb_image}}" alt="feature-top">
     </div>
     <!-- entity_thumb -->
 
     <div class="entity_content">
+        <p><b>{{$post->short_description}}</b> </p>
         <p>
-            But I must explain to you how all this mistaken idea of denouncing pleasure and praising
-            pain was born and I will give you a complete account of the system, and expound the
-            actual teachings of the great explorer of the truth, the master-builder of human
-            happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure,
-            but because those who do not know how to pursue pleasure rationally encounter
-            consequences that are extremely painful.
+            {!! $post->description !!}
         </p>
-
-        <p>
-            Nor again is there anyone who loves or pursues or desires to obtain pain of itself,
-            because it is pain, but because occasionally circumstances occur in which toil and pain
-            can procure him some great pleasure. To take a trivial example, which of us ever
-            undertakes laborious physical exercise, except to obtain some advantage from it?
-        </p>
-
-        <blockquote class="pull-left">But I must explain to you how all this mistaken idea of denouncing pleasure
-        </blockquote>
-        <p> But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-            no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-            On the other hand, we denounce with righteous indignation and dislike men who are so
-            beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire,
-            that they cannot foresee.Nor again is there anyone who loves or pursues or desires to
-            obtain pain of itself, because it is pain, but because occasionally circumstances occur
-            in which toil and pain can procure him some great pleasure. To take a trivial example,
-            which of us ever undertakes laborious physical exercise, except to obtain some advantage
-            from it? Nor again is there anyone who loves or pursues or desires to obtain pain of
-            itself, because it is pain, but because occasionally circumstances occur in which toil
-            and pain can procure him some great pleasure. To take a trivial example, which of us
-            ever
-        </p>
-
-        <p>
-            But I must explain to you how all this mistaken idea of denouncing pleasure and praising
-            pain was born and I will give you a complete account of the system, and expound the
-            actual teachings of the great explorer of the truth, the master-builder of human
-            happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure,
-            but because those who do not know how to pursue pleasure rationally encounter
-            consequences that are extremely painful.
-        </p>
+ 
     </div>
     <!-- entity_content -->
 
     <div class="entity_footer">
-        <div class="entity_tag">
-            <span class="blank"><a href="#">Tech</a></span>
-            <span class="blank"><a href="#">Transport</a></span>
-            <span class="blank"><a href="#">Mobile</a></span>
-            <span class="blank"><a href="#">Gadgets</a></span>
-        </div>
         <!-- entity_tag -->
 
         <div class="entity_social">
-            <span><i class="fa fa-share-alt"></i>424 <a href="#">Shares</a> </span>
-            <span><i class="fa fa-comments-o"></i>4 <a href="#">Comments</a> </span>
+            <span><i class="fa fa-comments-o"></i>{{count($post->comments)}} <a href="#">Comments</a> </span>
         </div>
         <!-- entity_social -->
 
@@ -119,81 +73,26 @@
     <!-- entity_title -->
 
     <div class="row">
+    @foreach($relatedPosts as $relatedPost)
         <div class="col-md-6">
             <div class="media">
                 <div class="media-left">
-                    <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/cat-mobi-sm1.jpg"
+                    <a href="#"><img class="media-object" src="{{asset('post').'/'.$relatedPost->list_image}}"
                                      alt="Generic placeholder image"></a>
                 </div>
                 <div class="media-body">
-                    <span class="tag purple"><a href="category.html" target="_self">Mobile</a></span>
+                    <span class="tag purple"><a href="category.html" target="_self">{{$relatedPost->category->name}}</a></span>
 
-                    <h3 class="media-heading"><a href="single.html" target="_self">Apple launches photo-centric wrist
-                        watch for Android</a></h3>
-                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
-
-                    <div class="media_social">
-                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
-                    </div>
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-left">
-                    <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/cat-mobi-sm3.jpg"
-                                     alt="Generic placeholder image"></a>
-                </div>
-                <div class="media-body">
-                    <span class="tag purple"><a href="category.html" target="_self">Mobile</a></span>
-
-                    <h3 class="media-heading"><a href="single.html" target="_self">The Portable Charger or data
-                        cable</a></h3>
-                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
+                    <h3 class="media-heading"><a href="{{url('details/'.$relatedPost->slug)}}" target="_self">{{$relatedPost->title}}</a></h3>
+                    <span class="media-date"><a href="#">{{date('F i-y',strtotime('$relatedPost->created_at'))}}</a>,  by: <a href="#">{{$relatedPost->creator->name}}</a></span>
 
                     <div class="media_social">
-                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                        <span><a href="#"><i class="fa fa-comments-o"></i>{{count($relatedPost->comments)}}</a> Comments</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/cat-mobi-sm2.jpg"
-                                     alt="Generic placeholder image"></a>
-                </div>
-                <div class="media-body">
-                    <span class="tag purple"><a href="category.html" target="_self">Mobile</a></span>
-
-                    <h3 class="media-heading"><a href="single.html" target="_self">Iphone 6 launches white & Grey
-                        colors handset</a></h3>
-                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
-
-                    <div class="media_social">
-                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
-                    </div>
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-left">
-                    <a href="#"><img class="media-object" src="{{asset('fontEnd')}}/img/cat-mobi-sm4.jpg"
-                                     alt="Generic placeholder image"></a>
-                </div>
-                <div class="media-body">
-                    <span class="tag purple"><a href="category.html" target="_self">Mobile</a></span>
-                    <a href="single.html" target="_self"><h3 class="media-heading">Fully new look slim handset
-                        like</h3></a>
-                    <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
-
-                    <div class="media_social">
-                        <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                        <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+         @endforeach
     </div>
 </div>
 <!-- Related news -->
@@ -208,49 +107,7 @@
         <h2>Readers Comment</h2>
     </div>
     <!-- entity_title -->
-
-    <div class="media">
-        <div class="media-left">
-            <a href="#">
-                <img alt="64x64" class="media-object" data-src="{{asset('fontEnd')}}/img/reader_img1.jpg"
-                     src="{{asset('fontEnd')}}/img/reader_img1.jpg" data-holder-rendered="true">
-            </a>
-        </div>
-        <div class="media-body">
-            <h2 class="media-heading"><a href="#">Sr. Ryan</a></h2>
-            But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-            no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-            <div class="entity_vote">
-                <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                <a href="#"><span class="reply_ic">Reply </span></a>
-            </div>
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img alt="64x64" class="media-object" data-src="{{asset('fontEnd')}}/img/reader_img2.jpg"
-                             src="{{asset('fontEnd')}}/img/reader_img2.jpg" data-holder-rendered="true">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h2 class="media-heading"><a href="#">Admin</a></h2>
-                    But who has any right to find fault with a man who chooses to enjoy a pleasure
-                    that has no annoying consequences, or one who avoids a pain that produces no
-                    resultant pleasure?
-
-                    <div class="entity_vote">
-                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                        <a href="#"><span class="reply_ic">Reply </span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!-- media end -->
-
+@foreach($comments as $comment)
     <div class="media">
         <div class="media-left">
             <a href="#">
@@ -259,26 +116,19 @@
             </a>
         </div>
         <div class="media-body">
-            <h2 class="media-heading"><a href="#">S. Joshep</a></h2>
-            But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-            no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-            <div class="entity_vote">
-                <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                <a href="#"><span class="reply_ic">Reply </span></a>
-            </div>
+            <h2 class="media-heading"><a href="#">{{$comment->name}}</a></h2>
+            {{$comment->comment}}
+           
         </div>
     </div>
+@endforeach
     <!-- media end -->
 </div>
 <!--Readers Comment-->
 
-<div class="widget_advertisement">
-    <img class="img-responsive" src="{{asset('fontEnd')}}/img/category_advertisement.jpg" alt="feature-top">
-</div>
-<!--Advertisement-->
 
+ 
+@auth
 <div class="entity_comments">
     <div class="entity_inner__title header_black">
         <h2>Add a Comment</h2>
@@ -286,23 +136,26 @@
     <!--Entity Title -->
 
     <div class="entity_comment_from">
-        <form>
+    {{ Form::open(array('url'=>'back/comment/reply','method' => 'POST')) }}
+      
             <div class="form-group">
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                {{Form::text('name',Auth::user()->name,['class'=>'form-control','disabled'])}}
+                
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+            {{Form::text('Email',Auth::user()->email,['class'=>'form-control','disabled'])}}
             </div>
             <div class="form-group comment">
-                <textarea class="form-control" id="inputComment" placeholder="Comment"></textarea>
+            {{Form::textarea('comment',null,['class'=>'form-control','placeholder'=>'Write your thinking..'])}}
             </div>
 
             <button type="submit" class="btn btn-submit red">Submit</button>
-        </form>
+        {{Form::close()}}
     </div>
     <!--Entity Comments From -->
 
 </div>
+@endif
 <!--Entity Comments -->
 
 </div>
@@ -392,25 +245,5 @@
 
 </section>
 <!-- Entity Section Wrapper -->
-
-<section id="subscribe_section" class="subscribe_section">
-    <div class="row">
-        <form action="#" method="post" class="form-horizontal">
-            <div class="form-group form-group-lg">
-                <label class="col-sm-6 control-label" for="formGroupInputLarge">
-                    <h1><span class="red-color">Sign up</span> for the latest news</h1>
-                </label>
-
-                <div class="col-sm-3">
-                    <input type="text" id="subscribe" name="subscribe" class="form-control input-lg">
-                </div>
-                <div class="col-sm-1">
-                    <input type="submit" value="Sign Up" class="btn btn-large pink">
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
-        </form>
-    </div>
-</section>
-<!-- Subscriber Section -->
+ 
 @endsection

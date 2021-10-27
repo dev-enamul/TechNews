@@ -35,6 +35,19 @@
                 </div>
                 <div class="col-md-4">
                     <div class="right_section">
+                    @if (Route::has('login'))
+                        @auth
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{url('back')}}">{{Auth::user()->name}}</a></li>
+                            <li><a class="nav-link"href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                        @else
                         <ul class="nav navbar-nav">
                             <li><a href="{{route('login')}}">Login</a></li>
                             <li><a href="{{route('register')}}">Register</a></li>
@@ -47,6 +60,8 @@
                                 </ul>
                             </li>
                         </ul>
+                        @endif
+                    @endif
                         <!-- Language Section -->
 
                         <ul class="nav-cta hidden-xs">
